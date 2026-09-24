@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Solicite Ações - Comunidade Viva</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Cabeçalho -->
+  <header>
+    <h1>🌱 Comunidade Viva</h1>
+    <nav>
+      <ul>
+        <li><a href="index.html">Início</a></li>
+        <li><a href="solicitar.html">Solicitar Ações</a></li>
+        <li><a href="voluntario.html">Seja Voluntário</a></li>
+        <li><a href="resultados.html">Resultados</a></li>
+        <li><a href="blog.html">Notícias</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- Seção de Formulário -->
+  <main style="background-color: #f4fcf8; padding: 40px;">
+    <h2 style="color: #045062; text-align: center;">📍 Solicite Ações na Sua Comunidade</h2>
+    <p style="text-align: center; max-width: 700px; margin: 0 auto; color: #345a5f;">
+      Aqui você pode indicar praças, ruas, espaços públicos ou locais abandonados que precisam das ações do projeto. Sua voz é essencial para construirmos juntos comunidades mais dignas e sustentáveis.
+    </p>
+
+    <form style="max-width: 600px; margin: 30px auto; background-color: #ffffff; padding: 30px; border-radius: 10px; box-shadow: 0 0 10px rgba(0,0,0,0.05);">
+      <label for="nome">Seu nome completo:</label><br>
+      <input type="text" id="nome" name="nome" required><br><br>
+
+      <label for="email">E-mail para contato:</label><br>
+      <input type="email" id="email" name="email"><br><br>
+
+      <label for="bairro">Bairro ou localização do local indicado:</label><br>
+      <input type="text" id="bairro" name="bairro" required><br><br>
+
+      <label for="descricao">Descreva o problema observado:</label><br>
+      <textarea id="descricao" name="descricao" rows="5" required></textarea><br><br>
+
+      <label for="imagem">Você pode enviar uma imagem (opcional):</label><br>
+      <input type="file" id="imagem" name="imagem" accept="image/*"><br><br>
+
+      <button type="submit" style="background-color: #6db9a3; color: white; padding: 12px 24px; border: none; border-radius: 20px; cursor: pointer;">
+        Enviar Solicitação
+      </button>
+    </form>
+  </main>
+
+  <!-- Rodapé -->
+  <footer>
+    <p>&copy; 2026 Comunidade Viva. Desenvolvido por Emerson Floriano da Silv.</p>
+  </footer>
+</body>
+</html>

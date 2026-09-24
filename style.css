@@ -1,0 +1,102 @@
+/* Fonte base e reset simples */
+body {
+  margin: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #f0fff5; /* Fundo verde bem claro */
+  color: #1f3d44; /* Azul petróleo suave para textos */
+}
+
+/* Cabeçalho */
+header {
+  background-color: #a7e7c3; /* Verde-claro natura */
+  padding: 20px;
+  text-align: center;
+}
+
+header h1 {
+  margin: 0;
+  font-size: 2em;
+  color: #004f6e; /* Azul profundo do mar */
+}
+
+nav ul {
+  list-style-type: none;
+  padding: 0;
+  margin-top: 10px;
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+}
+
+nav a {
+  text-decoration: none;
+  color: #004f6e;
+  font-weight: bold;
+  transition: color 0.3s ease;
+}
+
+nav a:hover {
+  color: #0a98b3; /* Azul vibrante do mar tropical */
+}
+
+/* Banner */
+#banner {
+  background: linear-gradient(135deg, #a7e7c3, #c1ecf2);
+  padding: 50px 20px;
+  text-align: center;
+  color: #054055;
+}
+
+#banner h2 {
+  font-size: 2em;
+  margin-bottom: 10px;
+}
+
+#banner .botao {
+  display: inline-block;
+  margin: 10px;
+  padding: 12px 24px;
+  background-color: #0a98b3; /* Azul do mar vibrante */
+  color: #fff;
+  border: none;
+  border-radius: 25px;
+  text-decoration: none;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+}
+
+#banner .botao:hover {
+  background-color: #07718a;
+}
+
+/* Seção "Sobre" */
+#sobre {
+  padding: 40px 20px;
+  background-color: #e6faf0;
+}
+
+#sobre h2 {
+  color: #004f6e;
+  font-size: 1.8em;
+  margin-bottom: 10px;
+}
+
+#sobre p, #sobre ul {
+  max-width: 700px;
+  margin: 0 auto;
+  line-height: 1.6;
+}
+
+#sobre ul {
+  list-style-type: disc;
+  padding-left: 20px;
+}
+
+/* Rodapé */
+footer {
+  background-color: #a7e7c3;
+  text-align: center;
+  padding: 20px;
+  color: #054055;
+  font-size: 0.9em;
+}
