@@ -100,3 +100,12 @@ footer {
   color: #054055;
   font-size: 0.9em;
 }
+
+.video-minimalista {
+  width: 100%;       /* Ocupa a largura disponível */
+  height: auto;      /* Mantém a proporção original */
+  display: block;    /* Remove espaço extra abaixo do vídeo */
+  border-radius: 8px; /* Cantos arredondados sutis */
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1); /* Sombra suave */
+  background-color: #000; /* Fundo preto enquanto carrega */
+}   
