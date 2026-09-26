@@ -5,6 +5,25 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Resultados - Comunidade Viva</title>
   <link rel="stylesheet" href="style.css">
+
+  <!-- Leaflet CSS -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+
+  <style>
+    #mapa {
+      height: 420px;
+      width: 100%;
+      border-radius: 12px;
+      margin-top: 15px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+    }
+    #mapa-status {
+      text-align: center;
+      color: #345a5f;
+      font-size: 0.9em;
+      margin-top: 8px;
+    }
+  </style>
 </head>
 <body>
   <header>
@@ -28,16 +47,21 @@
 
     <section style="max-width: 800px; margin: 40px auto;">
       <h3 style="color: #045062;">🌍 Comunidades Atendidas</h3>
-      <p>Mapa interativo em breve com pontos de impacto.</p>
+
+      <div id="mapa"></div>
+      <p id="mapa-status">Carregando mapa e localizando você...</p>
 
       <h3 style="color: #045062;">📷 Galeria de Ações</h3>
-      <p>Imagens dos mutirões, hortas e eventos em breve.</p>
-
+      <p>Mais imagens dos mutirões, hortas e eventos em breve. Enquanto isso veja um dos primeiros projetos em andamento</p>
+      <video controls poster="capa.jpg" class="video-minimalista">
+        <source src="https://github.com/SonEmer01/Ativi_Extens_2_Comuni_Viva/edit/main/Video_Demonstrativo_ProjetoARII.mp4" type="video/mp4">
+        Seu navegador não suporta o elemento de vídeo.
+      </video>   
       <h3 style="color: #045062;">📈 Indicadores</h3>
       <ul>
-        <li>Voluntários cadastrados: <strong>0</strong></li>
+        <li>Voluntários cadastrados: <strong>1</strong></li>
         <li>Litros de água reaproveitada: <strong>0</strong></li>
-        <li>Áreas revitalizadas: <strong>0</strong></li>
+        <li>Áreas revitalizadas: <strong>1 (em andamento)</strong></li>
       </ul>
     </section>
   </main>
@@ -45,5 +69,74 @@
   <footer>
     <p>&copy; 2026 Comunidade Viva. Desenvolvido por Emerson Floriano da Silv.</p>
   </footer>
+
+  <!-- Leaflet JS -->
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+  <script>
+    // Ícone customizado para os campos de impacto
+    const iconeImpacto = L.icon({
+      iconUrl: 'https://cdn-icons-png.flaticon.com/512/684/684908.png',
+      iconSize: [32, 32],
+      iconAnchor: [16, 32],
+      popupAnchor: [0, -32]
+    });
+
+    // Lista de "campos possíveis de impacto de revitalização urbana"
+    // Substitua depois pelos dados reais (ex: vindos de um banco de dados)
+    const camposDeImpacto = [
+      { nome: "Praça a revitalizar",        tipo: "Área verde",       offsetLat: 0.006,  offsetLng: 0.004 },
+      { nome: "Terreno baldio",             tipo: "Possível horta",   offsetLat: -0.004, offsetLng: 0.007 },
+      { nome: "Ponto de coleta seletiva",   tipo: "Sustentabilidade", offsetLat: 0.003,  offsetLng: -0.006 },
+      { nome: "Rua sem arborização",        tipo: "Arborização urbana", offsetLat: -0.007, offsetLng: -0.003 },
+      { nome: "Escola parceira",            tipo: "Educação ambiental", offsetLat: 0.008, offsetLng: 0.001 }
+    ];
+
+    const statusEl = document.getElementById('mapa-status');
+    let mapa;
+
+    function iniciarMapa(lat, lng, localizadoPorUsuario) {
+      mapa = L.map('mapa').setView([lat, lng], 14);
+
+      L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Light_Gray_Base/MapServer/tile/{z}/{y}/{x}', {
+        maxZoom: 16,
+        attribution: 'Tiles &copy; Esri &mdash; Esri, DeLorme, NAVTEQ'
+      }).addTo(mapa);
+
+      // Marcador da posição do usuário
+      L.circleMarker([lat, lng], {
+        radius: 8,
+        color: '#045062',
+        fillColor: '#0aa3a3',
+        fillOpacity: 0.9
+      }).addTo(mapa).bindPopup("📍 Você está aqui");
+
+      // Marcadores dos campos de impacto (gerados ao redor da localização)
+      camposDeImpacto.forEach(campo => {
+        L.marker(
+          [lat + campo.offsetLat, lng + campo.offsetLng],
+          { icon: iconeImpacto }
+        ).addTo(mapa)
+         .bindPopup(`<strong>${campo.nome}</strong><br>${campo.tipo}`);
+      });
+
+      statusEl.textContent = localizadoPorUsuario
+        ? "Mapa centralizado na sua localização atual."
+        : "Não foi possível obter sua localização exata — exibindo região padrão.";
+    }
+
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        (pos) => iniciarMapa(pos.coords.latitude, pos.coords.longitude, true),
+        () => {
+          // Localização padrão caso o usuário negue a permissão (ex: São Paulo)
+          iniciarMapa(-23.5505, -46.6333, false);
+        },
+        { timeout: 8000 }
+      );
+    } else {
+      iniciarMapa(-23.5505, -46.6333, false);
+    }
+  </script>
 </body>
 </html>
